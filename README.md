@@ -1,5 +1,41 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Periskope Groups UI
+
+WhatsApp-style group management interface: sidebar nav, paginated groups table, and a side panel with group details (Overview, Members, Logs). Built with Next.js 16 (App Router), TypeScript, Tailwind CSS, Supabase (Postgres), and Vitest.
+
+### Setup
+
+1. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+2. **Supabase**
+
+   - Create a [Supabase](https://supabase.com) project.
+   - Copy `.env.example` to `.env.local` and set:
+     - `NEXT_PUBLIC_SUPABASE_URL`
+     - `SUPABASE_SERVICE_ROLE_KEY` (or `NEXT_PUBLIC_SUPABASE_ANON_KEY`)
+
+3. **Database**
+
+   - Apply migrations and seed:
+
+     ```bash
+     supabase db reset
+     ```
+
+     Or run the SQL manually: `supabase/migrations/*.sql` then `supabase/seed.sql`.
+
+### Commands
+
+- `npm run dev` — start dev server
+- `npm run build` — production build
+- `npm test` — run Vitest tests
+- `npm run lint` — run ESLint
+
 ## Getting Started
 
 First, run the development server:
