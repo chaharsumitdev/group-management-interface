@@ -1,8 +1,9 @@
 "use client";
 
 import type { Group, Label, Project } from "@/types/groups";
+import { getAvatarUrl } from "@/lib/avatar";
 import { formatLastActive } from "@/lib/format";
-import { Users } from "lucide-react";
+import Image from "next/image";
 
 interface GroupRowProps {
   group: Group;
@@ -15,7 +16,7 @@ interface GroupRowProps {
 function ProjectTag({ project }: { project: Project }) {
   return (
     <span
-      className="inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
+      className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
       style={{ backgroundColor: `${project.color}20`, color: project.color }}
     >
       # {project.name}
@@ -32,14 +33,13 @@ function LabelTags({ labels, max = 2 }: { labels: Label[]; max?: number }) {
       {show.map((l) => (
         <span
           key={l.id}
-          className="inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
-          style={{ backgroundColor: `${l.color}20`, color: l.color }}
+          className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium text-gray-700 border border-gray-300"
         >
-          • {l.name.slice(0, 6)}{l.name.length > 6 ? "…" : ""}
+          <span className="rounded-full h-2 w-2 mr-1" style={{ backgroundColor: l.color }}></span> {l.name.slice(0, 6)}{l.name.length > 6 ? "…" : ""}
         </span>
       ))}
       {rest > 0 && (
-        <span className="text-xs text-gray-400">{rest}+</span>
+        <span className="text-xs text-gray-400 border border-gray-300 rounded-full px-1.5 py-0.5">{rest}+</span>
       )}
     </span>
   );
@@ -59,14 +59,14 @@ export function GroupRow({ group, selected, checked = false, onSelect, onCheck }
           onSelect(group.id);
         }
       }}
-      className={`border-b border-gray-100 transition-colors ${selected ? "bg-gray-100" : "bg-white hover:bg-gray-50"} cursor-pointer`}
+      className={`transition-colors text-center ${selected ? "bg-gray-100" : "bg-white hover:bg-gray-50"} cursor-pointer`}
       data-selected={selected}
       aria-current={selected ? "true" : undefined}
     >
-      <td className="w-10 px-4 py-3">
+      <td className="w-10 px-3 py-3">
         <input
           type="checkbox"
-          className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+          className="rounded border-gray-300 text-green-600 focus:ring-green-500"
           checked={checked}
           onChange={(e) => {
             e.stopPropagation();
@@ -76,29 +76,36 @@ export function GroupRow({ group, selected, checked = false, onSelect, onCheck }
           aria-label={`Select ${group.name}`}
         />
       </td>
-      <td className="px-4 py-3">
+      <td className="px-3 py-3">
         <div className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600">
-            <Users className="h-4 w-4" aria-hidden />
+          <span className="relative flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 text-gray-600">
+            <Image
+              src={getAvatarUrl(group.avatar, group.id)}
+              alt=""
+              width={36}
+              height={36}
+              className="object-cover"
+              aria-hidden
+            />
           </span>
-          <span className="font-medium text-gray-900">{group.name}</span>
-          {group.unread_messages && <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
+          <p className="font-medium text-sm text-gray-600 text-left">{group.name}</p>
+          {group.unread_messages && <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-green-400 px-1 text-xs font-medium text-white">
             {group.unread_messages}
           </span>}
         </div>
       </td>
-      <td className="px-4 py-3">
+      <td className="px-3 py-3">
         {project ? <ProjectTag project={project} /> : <span className="text-gray-400">—</span>}
       </td>
-      <td className="px-4 py-3">
+      <td className="px-3 py-3">
         {group.labels && group.labels.length > 0 ? (
           <LabelTags labels={group.labels} />
         ) : (
           <span className="text-gray-400">—</span>
         )}
       </td>
-      <td className="px-4 py-3 text-sm text-gray-600">{group.members_count}</td>
-      <td className="px-4 py-3 text-sm text-gray-600">
+      <td className="px-3 py-3 text-sm text-gray-600">{group.members_count}</td>
+      <td className="px-3 py-3 text-sm text-gray-400">
         {formatLastActive(group.last_active)}
       </td>
     </tr>

@@ -21,6 +21,7 @@ export interface Group {
   last_active: string;
   disappearing_messages: boolean;
   send_message_permission: string;
+  avatar?: string | null;
   created_at?: string;
 }
 

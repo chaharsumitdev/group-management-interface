@@ -5,7 +5,8 @@ import type { GroupsListResponse } from "@/types/groups";
 import { GroupRow } from "@/components/group-row";
 import { Pagination } from "@/components/pagination";
 import { GroupSidePanel } from "@/components/group-side-panel";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown, ChevronsUpDown, Search } from "lucide-react";
+import FilterList from "@mui/icons-material/FilterList";
 
 interface GroupsTableProps {
   initial: GroupsListResponse;
@@ -122,7 +123,7 @@ export function GroupsTable({ initial }: GroupsTableProps) {
   return (
     <div className="flex h-full min-h-0 gap-0">
       <div className="flex min-w-0 min-h-0 flex-1 flex-col">
-        <div className="border-b border-gray-200 bg-white px-6 py-4">
+        <div className="border-b border-gray-200 bg-gray-50 px-4 py-2">
           <div className="flex flex-wrap items-center gap-3">
             <div className="relative flex-1 min-w-[200px] max-w-sm">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden />
@@ -131,30 +132,30 @@ export function GroupsTable({ initial }: GroupsTableProps) {
                 placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-3 text-sm text-gray-900 placeholder-gray-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                className="w-full rounded-sm border border-gray-200 bg-white py-2 pl-8 pr-3 text-sm text-gray-900 placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
                 aria-label="Search groups"
               />
             </div>
             <button
               type="button"
-              className="flex items-center gap-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="flex items-center gap-1 rounded-sm border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
             >
+              <FilterList style={{ height: 12, width: 12 }} aria-hidden />
               Filter
-              <ChevronDown className="h-4 w-4" aria-hidden />
             </button>
             <div className="ml-auto flex items-center gap-2">
               <button
                 type="button"
-                className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
+                className="rounded-sm bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-900"
               >
                 Bulk message
               </button>
               <button
                 type="button"
-                className="flex items-center gap-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="flex items-center gap-1 rounded-sm border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
               >
                 Group Actions
-                <ChevronDown className="h-4 w-4" aria-hidden />
+                <ChevronsUpDown className="h-4 w-4" aria-hidden />
               </button>
             </div>
           </div>
@@ -168,12 +169,12 @@ export function GroupsTable({ initial }: GroupsTableProps) {
           )}
           {!loading && (
             <table className="w-full border-collapse">
-              <thead className="sticky top-0 z-10 bg-gray-50">
+              <thead className="sticky top-0 z-10 bg-white shadow-sm">
                 <tr>
-                  <th className="w-10 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" scope="col">
+                  <th className="w-10 px-3 py-2 font-medium uppercase tracking-wider text-gray-500" scope="col">
                     <input
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                      className="rounded border-gray-200 text-green-600 focus:ring-green-500"
                       checked={allChecked}
                       ref={(input) => {
                         if (input) input.indeterminate = someChecked && !allChecked;
@@ -182,19 +183,19 @@ export function GroupsTable({ initial }: GroupsTableProps) {
                       aria-label="Select all groups"
                     />
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" scope="col">
+                  <th className="px-3 py-2 text-left text-sm font-medium tracking-wider text-gray-700" scope="col">
                     Group Name
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" scope="col">
+                  <th className="px-3 py-2 text-center text-sm font-medium tracking-wider text-gray-700" scope="col">
                     Project
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" scope="col">
+                  <th className="px-3 py-2 text-left text-sm font-medium tracking-wider text-gray-700" scope="col">
                     Labels
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" scope="col">
+                  <th className="px-3 py-2 text-center text-sm font-medium tracking-wider text-gray-700" scope="col">
                     Members
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" scope="col">
+                  <th className="px-3 py-2 text-center text-sm font-medium tracking-wider text-gray-700" scope="col">
                     Last Active
                   </th>
                 </tr>

@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
+import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
+import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 interface PaginationProps {
   page: number;
   totalPages: number;
@@ -30,7 +31,7 @@ export function Pagination({
 
   return (
     <div
-      className="flex items-center border-t border-gray-200 bg-white px-4 py-3"
+      className="flex items-center bg-white px-3 py-2 shadow-[0_-2px_6px_rgba(0,0,0,0.08)]"
       role="navigation"
       aria-label="Table pagination"
     >
@@ -39,18 +40,18 @@ export function Pagination({
           <button
             type="button"
             onClick={handlePrev}
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+            className="flex items-center justify-center rounded-md py-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
             aria-label="Previous page"
           >
-            <ChevronLeft className="h-5 w-5" aria-hidden />
+            <KeyboardBackspaceOutlinedIcon style={{ height: 16, width: 16 }} aria-hidden />
           </button>
         ) : (
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
+            className="flex items-center justify-center rounded-md py-1 px-3 border border-gray-200 text-gray-400 cursor-not-allowed"
             aria-disabled="true"
             aria-label="Previous page"
           >
-            <ChevronLeft className="h-5 w-5" aria-hidden />
+            <KeyboardBackspaceOutlinedIcon style={{ height: 16, width: 16 }} aria-hidden />
           </span>
         )}
         <span>
@@ -60,21 +61,21 @@ export function Pagination({
           <button
             type="button"
             onClick={handleNext}
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+            className="flex items-center justify-center rounded-md py-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
             aria-label="Next page"
           >
-            <ChevronRight className="h-5 w-5" aria-hidden />
+            <EastOutlinedIcon style={{ height: 16, width: 16 }} aria-hidden />
           </button>
         ) : (
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
+            className="flex items-center justify-center rounded-md py-1 px-3 border border-gray-200 text-gray-400 cursor-not-allowed"
             aria-disabled="true"
             aria-label="Next page"
           >
-            <ChevronRight className="h-5 w-5" aria-hidden />
+            <EastOutlinedIcon style={{ height: 16, width: 16 }} aria-hidden />
           </span>
         )}
-        <span className="ml-2">{total} rows</span>
+        <span className="ml-1">{total} rows</span>
       </div>
     </div>
   );
