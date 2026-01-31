@@ -15,6 +15,7 @@ function mapGroupRow(row: {
   disappearing_messages: boolean;
   send_message_permission: string;
   avatar?: string | null;
+  problems_reported: number;
   created_at?: string;
   projects?: { id: number; name: string; color: string } | null;
   group_labels?: Array<{ labels: { id: number; name: string; color: string } | null }>;
@@ -34,6 +35,7 @@ function mapGroupRow(row: {
     disappearing_messages: row.disappearing_messages,
     send_message_permission: row.send_message_permission,
     avatar: row.avatar ?? null,
+    problems_reported: row.problems_reported,
     created_at: row.created_at,
   };
 }
@@ -59,6 +61,7 @@ export async function fetchGroupsList(
       disappearing_messages,
       send_message_permission,
       avatar,
+      problems_reported,
       created_at,
       projects ( id, name, color ),
       group_labels ( labels ( id, name, color ) )
@@ -104,6 +107,7 @@ export async function fetchGroupDetail(id: number): Promise<GroupDetail | null> 
       disappearing_messages,
       send_message_permission,
       avatar,
+      problems_reported,
       created_at,
       projects ( id, name, color ),
       group_labels ( labels ( id, name, color ) )

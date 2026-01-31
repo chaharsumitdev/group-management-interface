@@ -22,6 +22,7 @@ export interface Group {
   disappearing_messages: boolean;
   send_message_permission: string;
   avatar?: string | null;
+  problems_reported: number;
   created_at?: string;
 }
 

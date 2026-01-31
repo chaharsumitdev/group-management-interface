@@ -4,6 +4,7 @@ import type { Group, Label, Project } from "@/types/groups";
 import { getAvatarUrl } from "@/lib/avatar";
 import { formatLastActive } from "@/lib/format";
 import Image from "next/image";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
 interface GroupRowProps {
   group: Group;
@@ -89,9 +90,12 @@ export function GroupRow({ group, selected, checked = false, onSelect, onCheck }
             />
           </span>
           <p className="font-medium text-sm text-gray-600 text-left">{group.name}</p>
-          {group.unread_messages && <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-green-400 px-1 text-xs font-medium text-white">
-            {group.unread_messages}
-          </span>}
+          {group.problems_reported > 0 && <ReportProblemIcon style={{ height: 16, width: 16, color: "red" }} aria-hidden />}
+          {group.unread_messages ? (
+            <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-green-400 px-1 text-xs font-medium text-white">
+              {group.unread_messages}
+            </span>
+          ) : null}
         </div>
       </td>
       <td className="px-3 py-3">
